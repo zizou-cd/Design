@@ -1,27 +1,21 @@
+<!-- /mon_projet_hd/templates/index.html -->
 <!DOCTYPE html>
 <html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>H&D Designed — Créations Artisanales</title>
-  <meta name="description" content="Bienvenue chez H&D Designed. Découvrez nos créations artisanales uniques. Passez commande, laissez un avis et contactez-nous.">
-  
-  <!-- Polices de caractères depuis Google Fonts -->
+  <meta name="description" content="Bienvenue chez H&D Designed. Créations artisanales uniques.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Lien vers votre fichier CSS via Flask -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-  <!-- ==================== HEADER & NAVIGATION ==================== -->
   <header class="main-header">
     <nav class="main-nav">
       <div class="container nav-inner">
         <a href="#" class="brand">H&D Designed</a>
-        
-        <!-- Menu qui sera géré par JavaScript -->
         <div id="nav-menu">
           <div class="nav-links">
             <a href="#commande">Commander</a>
@@ -30,8 +24,6 @@
           </div>
           <button class="theme-toggle" id="themeToggle" title="Changer de thème">🌙</button>
         </div>
-
-        <!-- Bouton Hamburger pour mobile -->
         <button class="hamburger-btn" id="mobileMenuToggle" aria-label="Ouvrir le menu">
           <span class="bar bar1"></span>
           <span class="bar bar2"></span>
@@ -39,8 +31,6 @@
         </button>
       </div>
     </nav>
-
-    <!-- Section Héroïque -->
     <section class="hero-section">
       <div class="container">
         <div class="hero-content">
@@ -55,7 +45,6 @@
             </ul>
           </div>
           <div class="hero-image">
-            <!-- IMPORTANT: Mettez votre image dans le dossier /static/images/ et nommez-la hero-image.jpg -->
             <img src="{{ url_for('static', filename='images/hero-image.jpg') }}" alt="Création artisanale H&D Designed">
           </div>
         </div>
@@ -64,163 +53,65 @@
   </header>
 
   <main class="container">
-    <!-- ==================== SECTION COMMANDE ==================== -->
     <section id="commande" class="section">
       <h2 class="title">Finaliser votre commande</h2>
       <div class="card">
         <div id="product-info">
-          <img id="product-image" alt="Produit">
+          <img id="product-image" src="" alt="Image du produit commandé">
           <div>
             <div id="product-name"></div>
             <div id="product-price"></div>
           </div>
         </div>
-
         <form id="orderForm">
           <input type="hidden" id="hidden-product-name">
           <input type="hidden" id="hidden-product-price">
           <input type="hidden" id="hidden-product-image">
           <input type="hidden" id="hidden-source">
-
           <div class="form-grid">
-            <div class="form-group">
-              <label for="nom">Nom & Prénom</label>
-              <input id="nom" name="nom" required>
-            </div>
-            <div class="form-group">
-              <label for="telephone">Téléphone</label>
-              <input id="telephone" name="telephone" placeholder="05..." required pattern="^[0-9+ ]{8,15}$" title="Entrez un numéro de téléphone valide.">
-            </div>
+            <div class="form-group"><label for="nom">Nom & Prénom</label><input id="nom" name="nom" required></div>
+            <div class="form-group"><label for="telephone">Téléphone</label><input id="telephone" name="telephone" placeholder="05..." required pattern="^[0-9+ ]{8,15}$" title="Entrez un numéro de téléphone valide."></div>
           </div>
-
           <div class="form-grid">
-            <div class="form-group">
-              <label for="wilaya">Wilaya de livraison</label>
-              <select id="wilaya" name="wilaya" required>
-                <option value="">-- Sélectionnez votre Wilaya --</option>
-                <option value="Adrar">01 - Adrar</option><option value="Chlef">02 - Chlef</option><option value="Laghouat">03 - Laghouat</option><option value="Oum El Bouaghi">04 - Oum El Bouaghi</option><option value="Batna">05 - Batna</option><option value="Béjaïa">06 - Béjaïa</option><option value="Biskra">07 - Biskra</option><option value="Béchar">08 - Béchar</option><option value="Blida">09 - Blida</option><option value="Bouira">10 - Bouira</option><option value="Tamanrasset">11 - Tamanrasset</option><option value="Tébessa">12 - Tébessa</option><option value="Tlemcen">13 - Tlemcen</option><option value="Tiaret">14 - Tiaret</option><option value="Tizi Ouzou">15 - Tizi Ouzou</option><option value="Alger">16 - Alger</option><option value="Djelfa">17 - Djelfa</option><option value="Jijel">18 - Jijel</option><option value="Sétif">19 - Sétif</option><option value="Saïda">20 - Saïda</option><option value="Skikda">21 - Skikda</option><option value="Sidi Bel Abbès">22 - Sidi Bel Abbès</option><option value="Annaba">23 - Annaba</option><option value="Guelma">24 - Guelma</option><option value="Constantine">25 - Constantine</option><option value="Médéa">26 - Médéa</option><option value="Mostaganem">27 - Mostaganem</option><option value="M'Sila">28 - M'Sila</option><option value="Mascara">29 - Mascara</option><option value="Ouargla">30 - Ouargla</option><option value="Oran">31 - Oran</option><option value="El Bayadh">32 - El Bayadh</option><option value="Illizi">33 - Illizi</option><option value="Bordj Bou Arreridj">34 - Bordj Bou Arreridj</option><option value="Boumerdès">35 - Boumerdès</option><option value="El Tarf">36 - El Tarf</option><option value="Tindouf">37 - Tindouf</option><option value="Tissemsilt">38 - Tissemsilt</option><option value="El Oued">39 - El Oued</option><option value="Khenchela">40 - Khenchela</option><option value="Souk Ahras">41 - Souk Ahras</option><option value="Tipaza">42 - Tipaza</option><option value="Mila">43 - Mila</option><option value="Aïn Defla">44 - Aïn Defla</option><option value="Naâma">45 - Naâma</option><option value="Aïn Témouchent">46 - Aïn Témouchent</option><option value="Ghardaïa">47 - Ghardaïa</option><option value="Relizane">48 - Relizane</option><option value="Timimoun">49 - Timimoun</option><option value="Bordj Badji Mokhtar">50 - Bordj Badji Mokhtar</option><option value="Ouled Djellal">51 - Ouled Djellal</option><option value="Béni Abbès">52 - Béni Abbès</option><option value="In Salah">53 - In Salah</option><option value="In Guezzam">54 - In Guezzam</option><option value="Touggourt">55 - Touggourt</option><option value="Djanet">56 - Djanet</option><option value="El M'Ghair">57 - El M'Ghair</option><option value="El Meniaa">58 - El Meniaa</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="adresse">Adresse complète</label>
-              <input id="adresse" name="adresse" placeholder="Cité, rue, bâtiment..." required>
-            </div>
+            <div class="form-group"><label for="wilaya">Wilaya de livraison</label><select id="wilaya" name="wilaya" required><option value="">-- Sélectionnez votre Wilaya --</option><option value="Adrar">01 - Adrar</option><option value="Chlef">02 - Chlef</option><option value="Laghouat">03 - Laghouat</option><option value="Oum El Bouaghi">04 - Oum El Bouaghi</option><option value="Batna">05 - Batna</option><option value="Béjaïa">06 - Béjaïa</option><option value="Biskra">07 - Biskra</option><option value="Béchar">08 - Béchar</option><option value="Blida">09 - Blida</option><option value="Bouira">10 - Bouira</option><option value="Tamanrasset">11 - Tamanrasset</option><option value="Tébessa">12 - Tébessa</option><option value="Tlemcen">13 - Tlemcen</option><option value="Tiaret">14 - Tiaret</option><option value="Tizi Ouzou">15 - Tizi Ouzou</option><option value="Alger">16 - Alger</option><option value="Djelfa">17 - Djelfa</option><option value="Jijel">18 - Jijel</option><option value="Sétif">19 - Sétif</option><option value="Saïda">20 - Saïda</option><option value="Skikda">21 - Skikda</option><option value="Sidi Bel Abbès">22 - Sidi Bel Abbès</option><option value="Annaba">23 - Annaba</option><option value="Guelma">24 - Guelma</option><option value="Constantine">25 - Constantine</option><option value="Médéa">26 - Médéa</option><option value="Mostaganem">27 - Mostaganem</option><option value="M'Sila">28 - M'Sila</option><option value="Mascara">29 - Mascara</option><option value="Ouargla">30 - Ouargla</option><option value="Oran">31 - Oran</option><option value="El Bayadh">32 - El Bayadh</option><option value="Illizi">33 - Illizi</option><option value="Bordj Bou Arreridj">34 - Bordj Bou Arreridj</option><option value="Boumerdès">35 - Boumerdès</option><option value="El Tarf">36 - El Tarf</option><option value="Tindouf">37 - Tindouf</option><option value="Tissemsilt">38 - Tissemsilt</option><option value="El Oued">39 - El Oued</option><option value="Khenchela">40 - Khenchela</option><option value="Souk Ahras">41 - Souk Ahras</option><option value="Tipaza">42 - Tipaza</option><option value="Mila">43 - Mila</option><option value="Aïn Defla">44 - Aïn Defla</option><option value="Naâma">45 - Naâma</option><option value="Aïn Témouchent">46 - Aïn Témouchent</option><option value="Ghardaïa">47 - Ghardaïa</option><option value="Relizane">48 - Relizane</option><option value="Timimoun">49 - Timimoun</option><option value="Bordj Badji Mokhtar">50 - Bordj Badji Mokhtar</option><option value="Ouled Djellal">51 - Ouled Djellal</option><option value="Béni Abbès">52 - Béni Abbès</option><option value="In Salah">53 - In Salah</option><option value="In Guezzam">54 - In Guezzam</option><option value="Touggourt">55 - Touggourt</option><option value="Djanet">56 - Djanet</option><option value="El M'Ghair">57 - El M'Ghair</option><option value="El Meniaa">58 - El Meniaa</option></select></div>
+            <div class="form-group"><label for="adresse">Adresse complète</label><input id="adresse" name="adresse" placeholder="Cité, rue, bâtiment..." required></div>
           </div>
-
           <div class="form-grid">
-            <div class="form-group">
-              <label for="quantite">Quantité</label>
-              <input id="quantite" name="quantite" type="number" min="1" value="1">
-            </div>
-            <div class="form-group">
-              <label for="taille">Taille (optionnel)</label>
-              <input id="taille" name="taille" placeholder="Ex: S, M, L, 40x60cm...">
-            </div>
+            <div class="form-group"><label for="quantite">Quantité</label><input id="quantite" name="quantite" type="number" min="1" value="1"></div>
+            <div class="form-group"><label for="taille">Taille (optionnel)</label><input id="taille" name="taille" placeholder="Ex: S, M, L, 40x60cm..."></div>
           </div>
-
-          <div class="form-group">
-            <label for="couleur">Couleur (optionnel)</label>
-            <input id="couleur" name="couleur" placeholder="Ex: beige, noir, argenté...">
-          </div>
-
-          <div class="form-group">
-            <label for="description">Notes pour la personnalisation</label>
-            <textarea id="description" name="description" placeholder="Décrivez ici les détails particuliers, un nom à graver, etc."></textarea>
-          </div>
-
+          <div class="form-group"><label for="couleur">Couleur (optionnel)</label><input id="couleur" name="couleur" placeholder="Ex: beige, noir, argenté..."></div>
+          <div class="form-group"><label for="description">Notes pour la personnalisation</label><textarea id="description" name="description" placeholder="Décrivez ici les détails particuliers, un nom à graver, etc."></textarea></div>
           <button class="btn btn-primary" id="submitButton" type="submit">Valider ma Commande</button>
           <div id="statusMessage"></div>
         </form>
       </div>
     </section>
-
-    <!-- ==================== SECTION AVIS ==================== -->
     <section id="avis" class="section">
       <h2 class="title">Avis de nos clients</h2>
-      <div class="reviews-grid" id="reviewsList">
-        <!-- Les avis seront chargés ici par JavaScript -->
-      </div>
+      <div class="reviews-grid" id="reviewsList"></div>
       <div class="card" style="margin-top:25px">
         <h3 style="margin-bottom:15px; text-align:center;">Laisser un avis</h3>
         <form id="reviewForm">
           <div class="form-grid">
-            <div class="form-group">
-              <label for="r_nom">Votre nom</label>
-              <input id="r_nom" placeholder="Ex: Sarah B.">
-            </div>
-            <div class="form-group">
-              <label for="r_rating">Note</label>
-              <select id="r_rating" required>
-                <option value="">-- Donnez une note --</option>
-                <option value="5">★★★★★ Excellent</option>
-                <option value="4">★★★★☆ Très bien</option>
-                <option value="3">★★★☆☆ Bien</option>
-                <option value="2">★★☆☆☆ Moyen</option>
-                <option value="1">★☆☆☆☆ Décevant</option>
-              </select>
-            </div>
+            <div class="form-group"><label for="r_nom">Votre nom</label><input id="r_nom" placeholder="Ex: Sarah B."></div>
+            <div class="form-group"><label for="r_rating">Note</label><select id="r_rating" required><option value="">-- Donnez une note --</option><option value="5">★★★★★ Excellent</option><option value="4">★★★★☆ Très bien</option><option value="3">★★★☆☆ Bien</option><option value="2">★★☆☆☆ Moyen</option><option value="1">★☆☆☆☆ Décevant</option></select></div>
           </div>
-          <div class="form-group">
-            <label for="r_comment">Commentaire</label>
-            <textarea id="r_comment" required placeholder="Partagez votre expérience..."></textarea>
-          </div>
+          <div class="form-group"><label for="r_comment">Commentaire</label><textarea id="r_comment" required placeholder="Partagez votre expérience..."></textarea></div>
           <button class="btn btn-primary" type="submit">Envoyer mon avis</button>
           <div id="r_status"></div>
         </form>
       </div>
     </section>
   </main>
-  
-  <!-- ==================== FOOTER ==================== -->
   <footer>
     <p>© 2024 H&D Designed. Tous droits réservés.</p>
     <p><a href="#" class="mutelink open-modal" data-modal="returns">Politique de retour & Conditions</a></p>
   </footer>
-
-  <!-- ==================== FENÊTRES MODALES ==================== -->
-  <div class="modal" id="modal-about">
-    <div class="content">
-      <span class="close-btn" data-close>&times;</span>
-      <h3 class="title" style="margin-bottom:20px">Qui sommes-nous ?</h3>
-      <p>H&D Designed est né d'une passion pour l'artisanat et le design. Nous sommes deux créateurs, H. et D., dédiés à la fabrication d'objets uniques qui racontent une histoire. Chaque pièce est conçue et réalisée à la main dans notre atelier, avec des matériaux de qualité et une attention méticuleuse aux détails.</p>
-      <p>Notre mission est de proposer des créations authentiques qui apportent une touche de beauté et de singularité à votre quotidien.</p>
-    </div>
-  </div>
-
-  <div class="modal" id="modal-contact">
-    <div class="content">
-        <span class="close-btn" data-close>&times;</span>
-        <h3 class="title" style="margin-bottom:20px">Contactez-nous</h3>
-        <p>Pour toute question générale ou demande de partenariat, veuillez remplir ce formulaire.</p>
-        <form id="contactForm">
-          <div class="form-grid">
-            <div class="form-group"><label for="c_nom">Votre Nom</label><input id="c_nom" required></div>
-            <div class="form-group"><label for="c_moyen">Email / WhatsApp</label><input id="c_moyen" required></div>
-          </div>
-          <div class="form-group"><label for="c_msg">Votre Message</label><textarea id="c_msg" required></textarea></div>
-          <button class="btn btn-primary" type="submit">Envoyer le message</button>
-          <div id="c_status"></div>
-        </form>
-    </div>
-  </div>
-
-  <div class="modal" id="modal-returns">
-    <div class="content">
-        <span class="close-btn" data-close>&times;</span>
-        <h3 class="title" style="margin-bottom:20px">Politique de Retour</h3>
-        <p>Votre satisfaction est notre priorité. Si un article ne vous convient pas, voici notre politique :</p>
-        <ul style="margin-left:20px; list-style-type: '✓ '; padding-left: 1rem;">
-          <li>Les articles non personnalisés peuvent être retournés sous 7 jours après réception, dans leur état d'origine.</li>
-          <li>Les frais de retour sont à la charge du client.</li>
-          <li>Pour les articles personnalisés, les retours ne sont pas acceptés sauf en cas de défaut de fabrication avéré.</li>
-          <li>Pour initier un retour, veuillez nous contacter via nos réseaux sociaux avec votre numéro de commande.</li>
-        </ul>
-    </div>
-  </div>
-  
+  <div class="modal" id="modal-about"><div class="content"><span class="close-btn" data-close>&times;</span><h3 class="title" style="margin-bottom:20px">Qui sommes-nous ?</h3><p>H&D Designed est né d'une passion pour l'artisanat et le design. Nous sommes deux créateurs, H. et D., dédiés à la fabrication d'objets uniques qui racontent une histoire. Chaque pièce est conçue et réalisée à la main dans notre atelier, avec des matériaux de qualité et une attention méticuleuse aux détails.</p><p>Notre mission est de proposer des créations authentiques qui apportent une touche de beauté et de singularité à votre quotidien.</p></div></div>
+  <div class="modal" id="modal-contact"><div class="content"><span class="close-btn" data-close>&times;</span><h3 class="title" style="margin-bottom:20px">Contactez-nous</h3><p>Pour toute question générale ou demande de partenariat, veuillez remplir ce formulaire.</p><form id="contactForm"><div class="form-grid"><div class="form-group"><label for="c_nom">Votre Nom</label><input id="c_nom" required></div><div class="form-group"><label for="c_moyen">Email / WhatsApp</label><input id="c_moyen" required></div></div><div class="form-group"><label for="c_msg">Votre Message</label><textarea id="c_msg" required></textarea></div><button class="btn btn-primary" type="submit">Envoyer le message</button><div id="c_status"></div></form></div></div>
+  <div class="modal" id="modal-returns"><div class="content"><span class="close-btn" data-close>&times;</span><h3 class="title" style="margin-bottom:20px">Politique de Retour</h3><p>Votre satisfaction est notre priorité. Si un article ne vous convient pas, voici notre politique :</p><ul style="margin-left:20px; list-style-type: '✓ '; padding-left: 1rem;"><li>Les articles non personnalisés peuvent être retournés sous 7 jours après réception, dans leur état d'origine.</li><li>Les frais de retour sont à la charge du client.</li><li>Pour les articles personnalisés, les retours ne sont pas acceptés sauf en cas de défaut de fabrication avéré.</li><li>Pour initier un retour, veuillez nous contacter via nos réseaux sociaux avec votre numéro de commande.</li></ul></div></div>
   <button class="top-btn" id="toTop" title="Retour en haut">↑</button>
-
-  <!-- ==================== LIEN VERS LE FICHIER JAVASCRIPT ==================== -->
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========== GESTION DU THÈME (DARK/LIGHT) ==========
     const themeToggle = document.getElementById('themeToggle');
     const root = document.documentElement;
-    // Détecte le thème préféré du système ou utilise celui sauvegardé
     const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     
     root.setAttribute('data-theme', savedTheme);
@@ -24,8 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileMenuToggle.addEventListener('click', () => {
         document.body.classList.toggle('menu-open');
     });
-
-    // Fermer le menu en cliquant sur un lien (pour une navigation fluide sur une seule page)
     navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             document.body.classList.remove('menu-open');
@@ -54,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Fermer en cliquant en dehors de la modale
     window.addEventListener('click', (event) => {
         if (event.target.classList.contains('modal')) {
             closeModal(event.target);
@@ -77,37 +73,49 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========== PRÉ-REMPLISSAGE DU FORMULAIRE VIA URL ==========
     const params = new URLSearchParams(window.location.search);
     const pName = params.get('produit');
+
     if (pName) {
-        document.getElementById('product-info').style.display = 'flex';
-        document.getElementById('product-name').textContent = pName;
-        document.getElementById('hidden-product-name').value = pName;
+        const productInfoDiv = document.getElementById('product-info');
+        const productNameEl = document.getElementById('product-name');
+        const productPriceEl = document.getElementById('product-price');
+        const productImageEl = document.getElementById('product-image');
+
+        const hiddenProductName = document.getElementById('hidden-product-name');
+        const hiddenProductPrice = document.getElementById('hidden-product-price');
+        const hiddenProductImage = document.getElementById('hidden-product-image');
+        const hiddenSource = document.getElementById('hidden-source');
         
+        if (productInfoDiv) productInfoDiv.style.display = 'flex';
+        if (productNameEl) productNameEl.textContent = pName;
+        if (hiddenProductName) hiddenProductName.value = pName;
+
         const pPrice = params.get('prix');
         if (pPrice) {
-            document.getElementById('product-price').textContent = pPrice + ' DZD';
-            document.getElementById('hidden-product-price').value = pPrice;
+            if (productPriceEl) productPriceEl.textContent = pPrice + ' DZD';
+            if (hiddenProductPrice) hiddenProductPrice.value = pPrice;
         }
         
         const pImg = params.get('image');
-        if (pImg) {
-            document.getElementById('product-image').src = pImg;
-            document.getElementById('hidden-product-image').value = pImg;
+        if (pImg && productImageEl) {
+            productImageEl.src = pImg;
+            if (hiddenProductImage) hiddenProductImage.value = pImg;
         }
 
         const pSource = params.get('source');
-        if (pSource) {
-            document.getElementById('hidden-source').value = pSource;
+        if (pSource && hiddenSource) {
+            hiddenSource.value = pSource;
         }
         
-        // Aller directement à la section commande
-        document.getElementById('commande').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const commandeSection = document.getElementById('commande');
+        if (commandeSection) {
+            commandeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 
     // ========== SOUMISSION DES FORMULAIRES ==========
 
-    // --- Formulaire de Commande ---
     const orderForm = document.getElementById('orderForm');
-    if(orderForm){
+    if (orderForm) {
         orderForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const statusDiv = document.getElementById('statusMessage');
@@ -131,18 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                const response = await fetch('/send-order', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+                const response = await fetch('/send-order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
                 const result = await response.json();
                 if (!response.ok) throw new Error(result.message || 'Erreur serveur.');
-                
                 statusDiv.className = 'success';
                 statusDiv.textContent = `✅ ${result.message} (N° de commande : ${result.order_id})`;
                 orderForm.reset();
-
             } catch (err) {
                 statusDiv.className = 'error';
                 statusDiv.textContent = `❌ ${err.message}`;
@@ -150,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Chargement et soumission des Avis ---
     const reviewForm = document.getElementById('reviewForm');
     const reviewsList = document.getElementById('reviewsList');
 
@@ -159,17 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/api/reviews');
             const data = await response.json();
-            
-            reviewsList.innerHTML = ''; // Vider la liste
+            reviewsList.innerHTML = '';
             if (data.reviews && data.reviews.length > 0) {
                 data.reviews.forEach(rv => {
                     const div = document.createElement('div');
                     div.className = 'review-card';
-                    div.innerHTML = `
-                        <div class="stars">${'★'.repeat(rv.rating)}${'☆'.repeat(5 - rv.rating)}</div>
-                        <p>${rv.comment || ''}</p>
-                        <div class="author">- ${rv.name || 'Client'}</div>
-                    `;
+                    div.innerHTML = `<div class="stars">${'★'.repeat(rv.rating)}${'☆'.repeat(5 - rv.rating)}</div><p>${rv.comment || ''}</p><div class="author">- ${rv.name || 'Client'}</div>`;
                     reviewsList.appendChild(div);
                 });
             } else {
@@ -179,35 +175,23 @@ document.addEventListener('DOMContentLoaded', () => {
             reviewsList.innerHTML = '<p class="note">Erreur lors du chargement des avis.</p>';
         }
     }
-    loadReviews(); // Charger les avis au démarrage
+    loadReviews();
 
-    if(reviewForm){
+    if (reviewForm) {
         reviewForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const statusDiv = document.getElementById('r_status');
             statusDiv.textContent = 'Envoi...';
             statusDiv.className = '';
-
-            const data = {
-                name: document.getElementById('r_nom').value,
-                rating: parseInt(document.getElementById('r_rating').value, 10),
-                comment: document.getElementById('r_comment').value
-            };
-
+            const data = { name: document.getElementById('r_nom').value, rating: parseInt(document.getElementById('r_rating').value, 10), comment: document.getElementById('r_comment').value };
             try {
-                const response = await fetch('/send-review', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+                const response = await fetch('/send-review', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
                 const result = await response.json();
                 if (!response.ok) throw new Error(result.message);
-                
                 statusDiv.className = 'success';
                 statusDiv.textContent = `✅ ${result.message}`;
                 reviewForm.reset();
-                loadReviews(); // Recharger la liste des avis
-
+                loadReviews();
             } catch (err) {
                 statusDiv.className = 'error';
                 statusDiv.textContent = `❌ ${err.message}`;
@@ -215,30 +199,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Formulaire de Contact ---
     const contactForm = document.getElementById('contactForm');
-    if(contactForm){
+    if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const statusDiv = document.getElementById('c_status');
             statusDiv.textContent = 'Envoi...';
             statusDiv.className = '';
-
-            const data = {
-                name: document.getElementById('c_nom').value,
-                moyen: document.getElementById('c_moyen').value,
-                message: document.getElementById('c_msg').value
-            };
-
+            const data = { name: document.getElementById('c_nom').value, moyen: document.getElementById('c_moyen').value, message: document.getElementById('c_msg').value };
             try {
-                const response = await fetch('/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+                const response = await fetch('/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
                 const result = await response.json();
                 if (!response.ok) throw new Error(result.message);
-                
                 statusDiv.className = 'success';
                 statusDiv.textContent = '✅ Message envoyé. Nous vous répondrons bientôt !';
                 contactForm.reset();
@@ -249,4 +221,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-}); // Fin de DOMContentLoaded
+});
