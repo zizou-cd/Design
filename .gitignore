@@ -1,0 +1,15 @@
+# /mon_projet_hd/.gitignore
+
+# Fichiers de secrets
+.env
+
+# Environnement virtuel Python
+venv/
+
+# Fichiers de cache Python
+__pycache__/
+*.pyc
+
+# Dossier de données locales
+# Vous pouvez le commenter si vous VOULEZ sauvegarder vos commandes/avis sur GitHub
+data/

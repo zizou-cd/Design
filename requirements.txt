@@ -1,0 +1,4 @@
+# /mon_projet_hd/requirements.txt
+Flask
+requests
+python-dotenv
