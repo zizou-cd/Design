@@ -1,17 +1,9 @@
 /* ========== VARIABLES & RESET ========== */
 :root {
-  --primary-color: #33423b; /* Vert olive foncé */
-  --secondary-color: #fdfcfb; /* Blanc cassé / Crème */
-  --accent-color: #b9926b; /* Bronze / Or vieilli */
-  --text-color: #2c2c2c;
-  --muted-text-color: #757575;
-  --line-color: #ece9e6;
-  --card-bg: #ffffff;
-  --success-bg: #e7f5ed;
-  --success-text: #1b5e20;
-  --error-bg: #fde7e9;
-  --error-text: #8b1f2b;
-  --font-heading: 'Cormorant Garamond', serif;
+  --primary-color: #33423b; --secondary-color: #fdfcfb; --accent-color: #b9926b;
+  --text-color: #2c2c2c; --muted-text-color: #757575; --line-color: #ece9e6;
+  --card-bg: #ffffff; --success-bg: #e7f5ed; --success-text: #1b5e20;
+  --error-bg: #fde7e9; --error-text: #8b1f2b; --font-heading: 'Cormorant Garamond', serif;
   --font-body: 'Poppins', sans-serif;
 }
 [data-theme="dark"] {
@@ -65,14 +57,12 @@ body.menu-open { overflow: hidden; }
 .title { font-family: var(--font-heading); font-size: 2.5rem; color: var(--primary-color); text-align: center; margin-bottom: 40px; }
 .card { background-color: var(--card-bg); border: 1px solid var(--line-color); border-radius: 14px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); padding: 30px; }
 
-/* ========== BLOC PRODUIT (CORRIGÉ ET AMÉLIORÉ) ========== */
+/* ========== BLOC PRODUIT (VERSION TEXTE SEUL - MODIFIÉ) ========== */
 #product-info {
   display: none;
-  align-items: center;
-  gap: 25px;
   background-color: var(--secondary-color);
   border-left: 5px solid var(--accent-color);
-  padding: 20px;
+  padding: 15px 20px;
   border-radius: 12px;
   margin-bottom: 30px;
   animation: fadeInDown 0.5s ease-out;
@@ -80,24 +70,16 @@ body.menu-open { overflow: hidden; }
 [data-theme="dark"] #product-info {
   background-color: #1f2222;
 }
-#product-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-  flex-shrink: 0;
-}
 #product-name {
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: var(--primary-color);
-  line-height: 1.3;
 }
 #product-price {
   color: var(--accent-color);
-  font-weight: 600;
-  font-size: 1.2rem;
-  margin-top: 5px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-top: 2px;
 }
 
 /* ========== FORMULAIRES ========== */
