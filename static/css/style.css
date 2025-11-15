@@ -47,10 +47,16 @@ body.menu-open { overflow: hidden; }
 .hero-features { list-style: none; display: flex; flex-wrap: wrap; gap: 20px; margin-top: 30px; }
 .hero-features li { display: flex; align-items: center; gap: 8px; font-weight: 500; }
 .hero-features svg { color: var(--accent-color); flex-shrink: 0; }
+.hero-image {
+  width: 100%;
+  max-width: 800px; /* ajustez selon vos besoins */
+  margin: 0 auto;
+}
+
 .hero-image img {
-  width: 100%; /* اجعل الصورة تشغل كامل عرض الحاوية */
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  aspect-ratio: 4/3; /* ratio 4:3 */
+  object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
