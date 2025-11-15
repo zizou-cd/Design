@@ -47,7 +47,13 @@ body.menu-open { overflow: hidden; }
 .hero-features { list-style: none; display: flex; flex-wrap: wrap; gap: 20px; margin-top: 30px; }
 .hero-features li { display: flex; align-items: center; gap: 8px; font-weight: 500; }
 .hero-features svg { color: var(--accent-color); flex-shrink: 0; }
-.hero-image img { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); }
+..hero-image img {
+  width: 100%; /* اجعل الصورة تشغل كامل عرض الحاوية */
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
 .cta { margin-top: 30px; display: inline-block; background-color: var(--primary-color); color: #fff; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
 .cta:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
 
