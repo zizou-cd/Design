@@ -49,16 +49,16 @@ body.menu-open { overflow: hidden; }
 .hero-features svg { color: var(--accent-color); flex-shrink: 0; }
 .hero-image {
   width: 100%;
-  max-width: 800px; /* ajustez selon vos besoins */
+  max-width: 100%; /* ou une valeur maximale si nécessaire */
   margin: 0 auto;
 }
 
 .hero-image img {
   width: 100%;
-  aspect-ratio: 4/3; /* ratio 4:3 */
-  object-fit: cover;
+  height: auto; /* maintient le ratio original de l'image */
   border-radius: 12px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  display: block;
 }
 .cta { margin-top: 30px; display: inline-block; background-color: var(--primary-color); color: #fff; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
 .cta:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
